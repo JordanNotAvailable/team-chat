@@ -16,6 +16,13 @@ const typeDefs = gql`
     createdAt: String
   }
 
+  type Message {
+    _id: ID
+    userID: String
+    text: String
+    createdAt: String
+  }
+
   type Auth {
     token: ID!
     user: User
@@ -27,15 +34,15 @@ const typeDefs = gql`
     chats(username: String): [Chat]
     chat(chatId: ID!): Chat
     me: User
+    getMessages( _id:ID!,): [Chat]
   }
 
   type Mutation {
     addUser(username: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
-    addChat(chatText: String!): Chat
+    addChat(_id: ID, chatText: String!,): Chat
+    addMessage(_id:ID!, text: String!): Chat
     removeChat(ChatId: ID!): Chat
-    getMessages(from: String!, to: String!): [Chat]
-    addMessage(to: String!, message: String!): Chat
     removeMessage(messageId: ID!): Chat
   }
 `;

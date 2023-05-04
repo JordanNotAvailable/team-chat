@@ -1,10 +1,7 @@
 const { Schema, model } = require("mongoose");
 
 const messageSchema = new Schema({
-  messageId: {
-    type: String,
-  },
-  sender: {
+  userId: {
     type: String,
   },
   text: {
@@ -19,4 +16,4 @@ const messageSchema = new Schema({
 
 const Message = model("Message", messageSchema);
 
-// module.exports = Message;
+module.exports = Message;
