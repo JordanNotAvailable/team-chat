@@ -4,7 +4,7 @@ import { faCheck, faTimes, faInfoCircle } from "@fortawesome/free-solid-svg-icon
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useMutation } from "@apollo/client";
 import { ADD_USER } from "../../utils/mutations";
-// import { CHECK_USERNAME_QUERY } from "../../utils/queries";
+import { CHECK_USERNAME_QUERY } from "../../utils/queries";
 import './index.css';
 // import Loader from 'react-loaders';
 
@@ -15,11 +15,14 @@ const EMAIL_REGEX = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/;
 const Register = () => {
 
     const [ addUser, {error} ] = useMutation(ADD_USER)
+    // const [createUser] = useMutation(CHECK_USERNAME_QUERY)
+    
 
     const userRef = useRef();
     const errRef = useRef();
 
     const [user, setUser] = useState('');
+    
 
     const [validName, setValidName] = useState(false);
     const [userFocus, setUserFocus] = useState(false);
@@ -58,9 +61,9 @@ const Register = () => {
         setValidEmail(EMAIL_REGEX.test(email));
     }, [email]);
 
-    useEffect(() => {
-        setErrMsg('');
-    }, [user, pwd, matchPwd, email])
+    // useEffect(() => {
+    //     setErrMsg('');
+    // }, [user, pwd, matchPwd, email])
 
     // const { loading, wrong, data } = useQuery(CHECK_USERNAME_QUERY, {
     //     variables: { username },
@@ -78,10 +81,12 @@ const Register = () => {
         const v1 = USER_REGEX.test(user);
         const v2 = PWD_REGEX.test(pwd);
         const v3 = EMAIL_REGEX.test(email);
+
         if (!v1 || !v2 || !v3) {
             setErrMsg("Invalid Entry");
             return;
         }
+
         try {
             const { data } = await addUser({variables:{
                 username: user,
@@ -160,7 +165,7 @@ const Register = () => {
                             onFocus={() => setUserFocus(true)}
                             onBlur={() => setUserFocus(false)}
                         />
-                        {/* {username && !isUsernameAvailable && <p>Username is already taken.</p>} */}
+                        {/* { username && !isUsernameAvailable && <p>Username is already taken.</p> } */}
                         <p id="uidnote" className={userFocus && user && !validName ? "instructions" : "offscreen"}>
                             <FontAwesomeIcon icon={faInfoCircle} />
                             4 to 24 characters.<br />

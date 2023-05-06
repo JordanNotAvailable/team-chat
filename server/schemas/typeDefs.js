@@ -41,8 +41,6 @@ const typeDefs = gql`
     addMessage(_id: ID!, text: String!): Chat
     removeChat(_id: ID!): Chat
     removeMessage(_id: ID!): Chat
-    addFriend(username: String!): User
-    removeFriend(username: String!): User
   }
 `;
 
