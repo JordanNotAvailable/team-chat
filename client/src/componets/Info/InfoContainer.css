@@ -1,0 +1,10 @@
+.InfoContainer {
+    background: none;
+    position: absolute;
+    right: 40px;
+    top: 300px;
+    width: 500px;
+    transform: translateY(-50%);
+  }
+  
+  
