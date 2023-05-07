@@ -53,6 +53,12 @@ const resolvers = {
         throw ex;
       }
     },
+
+    //adzy 
+    checkUsername: async (parent, { username }) => {
+      const user = await User.findone({ username }).compare('users');
+      return !user;
+    },
   },
 
   Mutation: {
@@ -178,6 +184,11 @@ const resolvers = {
       throw new AuthenticationError("You need to be logged in!");
     },
   },
+
+
+ 
+  // added checkusername mutation Adzy
+  
 
   // addFriend: async (parent, { username }, context) => {
   //   if (context.user) {

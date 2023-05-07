@@ -15,13 +15,15 @@ const EMAIL_REGEX = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/;
 const Register = () => {
 
     const [ addUser, {error} ] = useMutation(ADD_USER)
-    // const [createUser] = useMutation(CHECK_USERNAME_QUERY)
+    const [checkUsername] = useMutation(CHECK_USERNAME_QUERY) //adzy
     
 
     const userRef = useRef();
     const errRef = useRef();
 
     const [user, setUser] = useState('');
+    const [username, setUsername] = useState('');
+    const [usernameError, setUsernameError] = useState(''); //adzy
     
 
     const [validName, setValidName] = useState(false);
@@ -82,10 +84,18 @@ const Register = () => {
         const v2 = PWD_REGEX.test(pwd);
         const v3 = EMAIL_REGEX.test(email);
 
+        const isValidUsername = await checkUsername({ variables: { username } });
+
+        //adzy
+        if (!isValidUsername) {
+        setUsernameError('Username is already taken');
+        return;
+        }
+
         if (!v1 || !v2 || !v3) {
             setErrMsg("Invalid Entry");
             return;
-        }
+        } //adzy
 
         try {
             const { data } = await addUser({variables:{
@@ -158,14 +168,15 @@ const Register = () => {
                             ref={userRef}
                             autoComplete="off"
                             onChange={(e) => setUser(e.target.value)}
-                            value={user}
+                            omChange={(e) => setUsernameError(e.target.value)}
+                            value={username}
                             required
                             aria-invalid={validName ? "false" : "true"}
                             aria-describedby="uidnote"
                             onFocus={() => setUserFocus(true)}
                             onBlur={() => setUserFocus(false)}
                         />
-                        {/* { username && !isUsernameAvailable && <p>Username is already taken.</p> } */}
+                        {/* { username && !isUsernameAvailable && <p>Username is already taken.</p> } */ usernameError && <div>{usernameError}</div>}
                         <p id="uidnote" className={userFocus && user && !validName ? "instructions" : "offscreen"}>
                             <FontAwesomeIcon icon={faInfoCircle} />
                             4 to 24 characters.<br />

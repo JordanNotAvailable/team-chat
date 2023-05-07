@@ -33,6 +33,7 @@ const typeDefs = gql`
     getAllMessages( _id:ID!, text: String! ): [Chat]
     getUserByUsername(username: String!): User
     getAllFriends(username: String!): User
+    checkUsername(username: String!): User
   }
   type Mutation {
     addUser(username: String!, email: String!, password: String!): Auth
@@ -41,7 +42,11 @@ const typeDefs = gql`
     addMessage(_id: ID!, text: String!): Chat
     removeChat(_id: ID!): Chat
     removeMessage(_id: ID!): Chat
+    
   }
 `;
 
 module.exports = typeDefs;
+
+
+//added checkusername mutation Adzy
