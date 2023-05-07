@@ -3,13 +3,14 @@ import { faCheck, faTimes, faInfoCircle } from "@fortawesome/free-solid-svg-icon
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useMutation } from "@apollo/client";
 import { LOG_IN } from "../../utils/mutations";
-import './Login.css';
+import './Signin.css';
 // import Loader from 'react-loaders';
 
 const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
+const REGISTER_URL = '/register';
 
-const LogIn = () => {
+const SignIn = () => {
 
     const [ signIn, {error} ] = useMutation(LOG_IN)
 
@@ -131,6 +132,7 @@ const LogIn = () => {
                     <p>
                         Dont have an account?<br />
                         <span className="line">
+                            {/*put router link here*/}
                             <a href="./Register">Create an account</a>
                         </span>
                     </p>
@@ -141,4 +143,6 @@ const LogIn = () => {
     )
 }
 
-export default LogIn
+export default SignIn
+
+

@@ -1,5 +1,39 @@
-.animationContainer {
-  background: #cf9531;
-  /* background: #9bb7b396; */
-  border: 2px solid #eae0e07a;
+.home-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.header-container {
+  flex-shrink: 0;
+}
+
+.content-container {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+}
+
+.home-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  flex-grow: 1;
+  height: 100vh;
+  margin-left: 20%;
+}
+
+.chats-container {
+  flex-grow: 1;
+  margin: 1rem;
+}
+
+.gamebar-container {
+  position: fixed;
+  left: 0;
+  top: 75px;
+  width: 130px;
+  height: 100vh;
 }

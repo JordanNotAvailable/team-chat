@@ -1,0 +1,43 @@
+.home {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.animation-background {
+  position: relative;
+  background-color: #f9fafb;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.content {
+  position: absolute;
+  top: 100px;
+}
+
+.games-container {
+  flex-basis: 50%;
+  margin: 1rem;
+  padding: 1rem;
+}
+
+@keyframes blob-move {
+  0% {
+    transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(100px, 100px);
+  }
+  50% {
+    transform: translate(0, 200px);
+  }
+  75% {
+    transform: translate(-100px, 100px);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}

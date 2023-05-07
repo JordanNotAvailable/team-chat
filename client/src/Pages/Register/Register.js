@@ -4,27 +4,22 @@ import { faCheck, faTimes, faInfoCircle } from "@fortawesome/free-solid-svg-icon
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useMutation } from "@apollo/client";
 import { ADD_USER } from "../../utils/mutations";
-import { CHECK_USERNAME_QUERY } from "../../utils/queries";
-import './index.css';
+// import { CHECK_USERNAME_QUERY } from "../../utils/queries";
+import './Register.css';
 // import Loader from 'react-loaders';
 
 const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
-const EMAIL_REGEX = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/;
+const EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
 const Register = () => {
 
     const [ addUser, {error} ] = useMutation(ADD_USER)
-    const [checkUsername] = useMutation(CHECK_USERNAME_QUERY) //adzy
-    
 
     const userRef = useRef();
     const errRef = useRef();
 
     const [user, setUser] = useState('');
-    const [username, setUsername] = useState('');
-    const [usernameError, setUsernameError] = useState(''); //adzy
-    
 
     const [validName, setValidName] = useState(false);
     const [userFocus, setUserFocus] = useState(false);
@@ -63,9 +58,9 @@ const Register = () => {
         setValidEmail(EMAIL_REGEX.test(email));
     }, [email]);
 
-    // useEffect(() => {
-    //     setErrMsg('');
-    // }, [user, pwd, matchPwd, email])
+    useEffect(() => {
+        setErrMsg('');
+    }, [user, pwd, matchPwd, email])
 
     // const { loading, wrong, data } = useQuery(CHECK_USERNAME_QUERY, {
     //     variables: { username },
@@ -83,20 +78,10 @@ const Register = () => {
         const v1 = USER_REGEX.test(user);
         const v2 = PWD_REGEX.test(pwd);
         const v3 = EMAIL_REGEX.test(email);
-
-        const isValidUsername = await checkUsername({ variables: { username } });
-
-        //adzy
-        if (!isValidUsername) {
-        setUsernameError('Username is already taken');
-        return;
-        }
-
         if (!v1 || !v2 || !v3) {
             setErrMsg("Invalid Entry");
             return;
-        } //adzy
-
+        }
         try {
             const { data } = await addUser({variables:{
                 username: user,
@@ -168,15 +153,14 @@ const Register = () => {
                             ref={userRef}
                             autoComplete="off"
                             onChange={(e) => setUser(e.target.value)}
-                            omChange={(e) => setUsernameError(e.target.value)}
-                            value={username}
+                            value={user}
                             required
                             aria-invalid={validName ? "false" : "true"}
                             aria-describedby="uidnote"
                             onFocus={() => setUserFocus(true)}
                             onBlur={() => setUserFocus(false)}
                         />
-                        {/* { username && !isUsernameAvailable && <p>Username is already taken.</p> } */ usernameError && <div>{usernameError}</div>}
+                        {/* {username && !isUsernameAvailable && <p>Username is already taken.</p>} */}
                         <p id="uidnote" className={userFocus && user && !validName ? "instructions" : "offscreen"}>
                             <FontAwesomeIcon icon={faInfoCircle} />
                             4 to 24 characters.<br />
@@ -232,6 +216,7 @@ const Register = () => {
                     <p>
                         Already have an account?<br />
                         <span className="line">
+                            {/*put router link here*/}
                             <a href="./Signin">Sign In</a>
                         </span>
                     </p>
