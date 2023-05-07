@@ -23,3 +23,50 @@ export const LOG_IN = gql
         }
       }
 }`
+
+export const ADD_CHAT = gql
+  `mutation AddChat($users: [ID!]) {
+    addChat(users: $users) {
+      _id
+      messages {
+        createdAt
+        text
+        userID
+      }
+      users {
+        username
+      }
+    }
+}`
+
+export const ADD_MESSAGE = gql
+  `mutation AddMessage($id: ID!, $text: String!) {
+    addMessage(_id: $id, text: $text) {
+      messages {
+        createdAt
+        text
+        userID
+      }
+      users {
+        username
+      }
+    }
+}`
+
+export const REMOVE_CHAT = gql
+  `mutation RemoveChat($id: ID!) {
+    removeChat(_id: $id) {
+      _id
+    }
+}`
+
+export const REMOVE_MESSAGE = gql
+  `mutation RemoveMessage($id: ID!) {
+    removeMessage(_id: $id) {
+      _id
+    }
+}`
+
+// export const ADD_FRIEND = gql
+
+// export const REMOVE_FRIEND = gql
