@@ -1,10 +1,10 @@
 /* eslint-disable no-unused-vars */
-import { useRef, useState, useEffect, useQuery } from "react";
+import { useRef, useState, useEffect } from "react";
 import { faCheck, faTimes, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useMutation } from "@apollo/client";
+import { useMutation, useLazyQuery} from "@apollo/client";
 import { ADD_USER } from "../../utils/mutations";
-// import { CHECK_USERNAME_QUERY } from "../../utils/queries";
+import { CHECK_USERNAME } from "../../utils/queries";
 import './Register.css';
 // import Loader from 'react-loaders';
 
@@ -16,6 +16,8 @@ const Register = () => {
 
     const [ addUser, {error} ] = useMutation(ADD_USER)
 
+    // const [ usernameCheck, {error} ] =
+
     const userRef = useRef();
     const errRef = useRef();
 
@@ -24,7 +26,7 @@ const Register = () => {
     const [validName, setValidName] = useState(false);
     const [userFocus, setUserFocus] = useState(false);
 
-    // const [isUsernameTaken, setIsUsernameTaken] = useState(false);
+    const [isUsernameTaken, setIsUsernameTaken] = useState(false);
 
     const [pwd, setPwd] = useState('');
     const [validPwd, setValidPwd] = useState(false);
@@ -62,6 +64,8 @@ const Register = () => {
         setErrMsg('');
     }, [user, pwd, matchPwd, email])
 
+    const [checkUsername,{ loading, wrong, data }] = useLazyQuery (CHECK_USERNAME, {variables: { username:user }})
+
     // const { loading, wrong, data } = useQuery(CHECK_USERNAME_QUERY, {
     //     variables: { username },
     //     skip: !username, // skip query if username is empty
@@ -72,6 +76,15 @@ const Register = () => {
     //       setIsUsernameTaken(!!data.user);
     //     }
     //   }, [loading, wrong, data]);
+
+    useEffect( () => {
+        if ( user != '' && !userFocus ) {
+            checkUsername()
+            // .then ( (result) => { 
+            //   console.log(result.data.checkUsername)  
+            // } )
+        }
+    },[userFocus])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -160,7 +173,7 @@ const Register = () => {
                             onFocus={() => setUserFocus(true)}
                             onBlur={() => setUserFocus(false)}
                         />
-                        {/* {username && !isUsernameAvailable && <p>Username is already taken.</p>} */}
+                        {user !='' &&  data && !data.checkUsername && <p>Username is already taken.</p>}
                         <p id="uidnote" className={userFocus && user && !validName ? "instructions" : "offscreen"}>
                             <FontAwesomeIcon icon={faInfoCircle} />
                             4 to 24 characters.<br />
