@@ -33,7 +33,7 @@ const typeDefs = gql`
     getAllMessages( _id:ID!, text: String! ): [Chat]
     getUserByUsername(username: String!): User
     getAllFriends(username: String!): User
-    checkUsername(username: String!): User
+    checkUsername(username: String!): Boolean
   }
   type Mutation {
     addUser(username: String!, email: String!, password: String!): Auth

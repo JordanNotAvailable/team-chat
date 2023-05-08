@@ -56,7 +56,7 @@ const resolvers = {
 
     //adzy 
     checkUsername: async (parent, { username }) => {
-      const user = await User.findone({ username }).compare('users');
+      const user = await User.findOne({ username });
       return !user;
     },
   },
