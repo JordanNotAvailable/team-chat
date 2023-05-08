@@ -19,7 +19,7 @@ export const LOG_IN = gql
         token
         user {
           username
-          email
+          password
         }
       }
 }`
@@ -67,6 +67,16 @@ export const REMOVE_MESSAGE = gql
     }
 }`
 
-// export const ADD_FRIEND = gql
+export const ADD_FRIEND = gql
+`mutation Mutation($username: String!) {
+  addFriend(username: $username) {
+    username
+  }
+}`
 
-// export const REMOVE_FRIEND = gql
+export const REMOVE_FRIEND = gql
+`mutation Mutation($username: String!) {
+  removeFriend(username: $username) {
+    username
+  }
+}`

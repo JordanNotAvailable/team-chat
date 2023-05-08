@@ -1,7 +1,16 @@
 import React from 'react';
+import { useState } from "react";
+import Modal from '../FriendModal/FriendModal'
 import './ChatNav.css';
 
 export default function ChatNav() {
+
+  const [modal, setModal] = useState(false);
+
+  const toggle = () => {
+    setModal(!modal);
+  };
+
   return (
     <>
       <div className="ChatNav">
@@ -12,7 +21,8 @@ export default function ChatNav() {
           </div>
           <div className="button-group">
             <button>Create chat</button>
-            <button>Add friend</button>
+            <button onClick={toggle}>Add friend</button>
+            {modal ? <Modal toggle={toggle} /> : null}
           </div>
         </div>
       </div>
