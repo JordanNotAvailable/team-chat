@@ -11,7 +11,7 @@ export default function MainChat({ setOpen, chatActive, socket, onOpen, groupcha
   }, [socket, messages]);
 
   useEffect(() => {
-    // 👇️ scroll to bottom every time messages change
+    //  scroll to bottom every time messages change
     lastMessageRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
   console.log(messages)
