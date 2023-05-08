@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
-import ChatBar from "../../componets/ChatComponents/Chatbar"
-import ChatBody from "../../componets/ChatComponents/ChatBody";
-import ChatFooter from "../../componets/ChatComponents/ChatFooter";
+import ChatBar from "../../componets/ChatContent/ChatBar"
+import ChatBody from "../../componets/ChatContent/ChatBody";
+import ChatFooter from "../../componets/ChatContent/ChatFooter";
 import "./chat.css"
 const ChatPage = ({ socket, groupchat }) => {
   const [messages, setMessages] = useState([]);
