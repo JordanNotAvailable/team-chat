@@ -16,8 +16,6 @@ const Register = () => {
 
     const [ addUser, {error} ] = useMutation(ADD_USER)
 
-    // const [ usernameCheck, {error} ] =
-
     const userRef = useRef();
     const errRef = useRef();
 
@@ -66,23 +64,9 @@ const Register = () => {
 
     const [checkUsername,{ loading, wrong, data }] = useLazyQuery (CHECK_USERNAME, {variables: { username:user }})
 
-    // const { loading, wrong, data } = useQuery(CHECK_USERNAME_QUERY, {
-    //     variables: { username },
-    //     skip: !username, // skip query if username is empty
-    //   });
-
-    // useEffect(() => {
-    //     if (!loading && !wrong) {
-    //       setIsUsernameTaken(!!data.user);
-    //     }
-    //   }, [loading, wrong, data]);
-
     useEffect( () => {
         if ( user != '' && !userFocus ) {
             checkUsername()
-            // .then ( (result) => { 
-            //   console.log(result.data.checkUsername)  
-            // } )
         }
     },[userFocus])
 

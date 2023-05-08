@@ -3,7 +3,7 @@
 
 ## **Description**
 
-This site is primarily made with react as the front-end and mongoDb as the backend with GraphQL with API routes .....
+This site is made with MERN stack (MongoDB, Express, React and Node) using GRaphQl inplace of REST APIs and is designed as a place to make and talk to friends as well as playing games.
 
 ---
 ## **Table of Contents**
@@ -15,16 +15,26 @@ This site is primarily made with react as the front-end and mongoDb as the backe
 
 ---
 ## **Installation**
-<!-- The application can be used by going to the deployed site and either using it on browser or downloading it as a native app. -->
+The application can be used by going to the deployed site and either using it on browser or forking the code and running it locally.
 
 
 ---
 ## **Technologies Used**
 
+- concurrently
+- @apollo/client
+- @testing-library/jest-dom
+- @testing-library/react
+- @testing-library/user-event
 - @fortawesome/fontawesome-svg-core
 - @fortawesome/free-solid-svg-icons
 - @fortawesome/react-fontawesome
-- axios
+- apollo-server-express
+- bcrypt
+- graphql
+- jsonwebtoken
+- jwt-decode
+- socket.io
 - cors
 - express
 - mongoose
@@ -34,15 +44,16 @@ This site is primarily made with react as the front-end and mongoDb as the backe
 - react-router-dom
 - react-scripts
 - web-vitals
+- tailwindcss
 
 These can be downloaded localally by doing 'npm i' in console.
 ---
 
 ## **Usage**
 
-<!-- To use this site, you simply go to the deployed application and either use it in browser or install it as a native app.
+<!-- To use this site, you simply go to the deployed application and use it in browser.
 
-Below is a demo gif of the site :
+Below is a demo image of the site :
 
 The following image shows the application's IndexedDB storage:
 
@@ -60,14 +71,8 @@ The following image shows the application's IndexedDB storage:
 
 [Abewd Alfadhly's Github Profile ](https://github.com/Abewd).
 ---
-[Adam Pilato's Github Profile ](https://github.com/Adzy89).
----
 [Jordan O'Grady's Github Profile ](https://github.com/JordanNotAvailable).
 ---
-
-<!-- Github visitors count -->
-
-<!-- [![](https://visitcount.itsvg.in/api?id=JordanNotAvailable/team-chatt&icon=0&color=0)](https://visitcount.itsvg.in) -->
 
 ---
 

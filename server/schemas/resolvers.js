@@ -1,5 +1,5 @@
 const { AuthenticationError } = require("apollo-server-express");
-const { User, Chat } = require("../models");
+const { User, Chat, Message } = require("../models");
 const { signToken } = require("../utils/auth");
 const bcrypt = require("bcrypt");
 
@@ -18,16 +18,17 @@ const resolvers = {
     chat: async (parent, { chatId }) => {
       return Chat.findOne({ _id: chatId });
     },
-    me: async (parent, x, context) => {
+    me: async (parent, args, context) => {
       if (context.user) {
         return User.findOne({ _id: context.user._id }).populate("chats");
       }
       throw new AuthenticationError("You need to be logged in!");
     },
-    getUserByUsername: async ({ username }) => {
+    getUserByUsername: async (parent, { username }) => {
       try {
         const user = await User.findOne({ username });
-        return {user};
+        console.log(user)
+        return user;
       } catch (ex) {
         next(ex);
       }
@@ -54,7 +55,6 @@ const resolvers = {
       }
     },
 
-    //adzy 
     checkUsername: async (parent, { username }) => {
       const user = await User.findOne({ username });
       return !user;
@@ -70,13 +70,16 @@ const resolvers = {
     },
 
     login: async (parent, { username, password }) => {
+      try{
       const user = await User.findOne({ username });
 
       if (!user) {
         throw new AuthenticationError("No user found with this username");
       }
+      console.log(user)
 
-      const correctPw = bcrypt.compare(password, User.password);
+      const correctPw = await user.isCorrectPassword(password);
+
 
       if (!correctPw) {
         throw new AuthenticationError("Incorrect credentials");
@@ -85,6 +88,10 @@ const resolvers = {
       const token = signToken(user);
 
       return { token, user };
+    }
+    catch(err){
+      console.log(err)
+    }
     },
 
     addChat: async (parent, { users }, context) => {
@@ -183,49 +190,42 @@ const resolvers = {
       }
       throw new AuthenticationError("You need to be logged in!");
     },
+      addFriend: async (parent, { username }, context) => {
+        if (context.user) {
+          const friend = await User.findOne({ username });
+
+        if (!friend) {
+          throw new UserInputError("User not found!");
+        }
+
+        await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $addToSet: { friends: friend._id } }
+        );
+        
+        return friend;
+      }
+        throw new AuthenticationError("You need to be logged in!");
+    },
+
+    removeFriend: async (parent, { username }, context) => {
+      if (context.user) {
+        const friend = await User.findOne({ username });
+  
+        if (!friend) {
+          throw new UserInputError("User not found!");
+        }
+  
+        await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $pull: { friends: friend._id } }
+        );
+  
+        return friend;
+      }
+      throw new AuthenticationError("You need to be logged in!");
+    },
   },
-
-
- 
-  // added checkusername mutation Adzy
-  
-
-  // addFriend: async (parent, { username }, context) => {
-  //   if (context.user) {
-  //     const friend = await User.findOne({ username });
-
-  //     if (!friend) {
-  //       throw new UserInputError("User not found!");
-  //     }
-
-  //     await User.findOneAndUpdate(
-  //       { _id: context.user._id },
-  //       { $addToSet: { friends: friend._id } }
-  //     );
-
-  //     return friend;
-  //   }
-  //   throw new AuthenticationError("You need to be logged in!");
-  // },
-
-  // removeFriend: async (parent, { username }, context) => {
-  //   if (context.user) {
-  //     const friend = await User.findOne({ username });
-  
-  //     if (!friend) {
-  //       throw new UserInputError("User not found!");
-  //     }
-  
-  //     await User.findOneAndUpdate(
-  //       { _id: context.user._id },
-  //       { $pull: { friends: friend._id } }
-  //     );
-  
-  //     return friend;
-  //   }
-  //   throw new AuthenticationError("You need to be logged in!");
-  // },
-  
 };
 
 module.exports = resolvers;
