@@ -3,6 +3,7 @@ import Score from "../../componets/SPRcomps/Score";
 import Play from "../../componets/SPRcomps/Play";
 import Game from "../../componets/SPRcomps/Game";
 import Footer from "../../componets/SPRcomps/Footer";
+import '../../styles.scss'
 import { Routes, Route } from "react-router-dom";
 
 function SPR() {
