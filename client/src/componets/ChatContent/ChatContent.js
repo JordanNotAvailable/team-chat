@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
-import ChatBar from "../../componets/ChatContent/ChatBar"
+import ChatBar from "../../componets/ChatContent/ChatBar";
 import ChatBody from "../../componets/ChatContent/ChatBody";
 import ChatFooter from "../../componets/ChatContent/ChatFooter";
-import "./chat.css"
+import "./chat.css";
 const ChatPage = ({ socket, groupchat }) => {
   const [messages, setMessages] = useState([]);
   const [typingStatus, setTypingStatus] = useState("");
@@ -13,7 +13,7 @@ const ChatPage = ({ socket, groupchat }) => {
   }, [socket, messages]);
 
   useEffect(() => {
-    // 👇️ scroll to bottom every time messages change
+    // scroll to bottom every time messages change
     lastMessageRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
