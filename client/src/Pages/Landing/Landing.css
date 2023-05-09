@@ -15,7 +15,7 @@
 
 .content {
   position: absolute;
-  top: 100px;
+  top: 300px;
 }
 
 .games-container {
@@ -41,3 +41,16 @@
     transform: translate(0, 0);
   }
 }
+
+
+  @media screen and (max-width: 768px) {
+    .games-container{
+      flex-basis: unset;
+      margin: 0px;
+      padding: 0px;
+    }
+
+    .faded {
+      margin-top: 300px;
+    }
+  }

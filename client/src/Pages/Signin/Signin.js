@@ -43,25 +43,27 @@ function Signin(props) {
                     </p>
                 </section>
             ) : (
-                <section className="container my-1">
-                    <h2>Login</h2>
+                <section className="rounded-sm my-1 bg-[#1e1b4b]">
+                    <h2 className='text-white w-full text-center'>Login</h2>
                     <form onSubmit={handleFormSubmit}>
-                        <div className="flex-row space-between my-2">
-                            <label htmlFor="username">Username:</label>
+                        <div className="">
+                            <label htmlFor="username" className='w-full text-white'>Username:</label>
                             <input
                                 placeholder="Username"
                                 name="username"
                                 type="text"
+                                className="w-full rounded-sm"
                                 id="username"
                                 onChange={handleChange}
                             />
                         </div>
-                        <div className="flex-row space-between my-2">
-                            <label htmlFor="pwd">Password:</label>
+                        <div className="">
+                            <label htmlFor="pwd" className='w-full text-white'>Password:</label>
                             <input
                                 placeholder="Password"
                                 name="password"
                                 type="password"
+                                className="w-full rounded-sm"
                                 id="pwd"
                                 onChange={handleChange}
                             />
@@ -71,13 +73,14 @@ function Signin(props) {
                                 <p className="error-text">The provided credentials are incorrect</p>
                             </div>
                         ) : null}
-                        <div className="flex-row flex-end">
-                            <button type="submit">Submit</button>
-                        </div>
+                    
+                        <button  type="submit" className="px-4 py-2 mt-6 hover:bg-blue-600 bg-blue-500 text-white rounded">
+                            Sign In
+                        </button>
                     </form>
-                        <p>
+                        <p className='text-white'>
                             Dont have an account?<br />
-                            <span className="line">
+                            <span className="line text-sm" style={{fontSize : '16px'}}>
                                 <a href="./Register">Create an account</a>
                             </span>
                         </p>
