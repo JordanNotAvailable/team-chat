@@ -94,11 +94,14 @@ const resolvers = {
     }
     },
 
-    addChat: async (parent, { users }, context) => {
+    addChat: async (parent, { users, chatName }, context) => {
+      let userArray = await User.find({username:{$all:users}})
+      console.log(userArray)
       if (context.user) {
         const chat = await Chat.create({
-          users,
-          chatAuthor: context.user.username,
+          users:userArray,
+          sender: context.user._id,
+          chatName,
         });
 
         await User.findOneAndUpdate(
@@ -111,7 +114,7 @@ const resolvers = {
       throw new AuthenticationError("You need to be logged in!");
     },
 
-    removeChat: async (parent, { _id }, context) => {
+    removeChat: async (parent, { chatName }, context) => {
       if (context.user) {
         const chat = await Chat.findOneAndDelete({
           _id: _id,

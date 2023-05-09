@@ -4,7 +4,7 @@ import ChatPopup from "../../componets/ChatPopUp/ChatPopup";
 import ChatNav from "../../componets/ChatNav/ChatNav.js";
 import Gamebar from "../../componets/Gamebar/Gamebar.js";
 import ChatContainer from "../../componets/ChatContainer/ChatContainer.js";
-import './home.css';
+import './Home.css';
 
 const socket = socketIO.connect("http://localhost:4000");
 
