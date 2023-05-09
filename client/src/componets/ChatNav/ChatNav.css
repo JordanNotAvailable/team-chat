@@ -41,6 +41,24 @@
 }
 
 .ChatNav {
-  margin-top: 1rem;
   right: 0;
+}
+
+.ChatNav .header{
+  background-color: inherit;
+}
+
+
+@media screen and (max-width : 768px) {
+  .ChatNav .header{
+    flex-direction: column !important;
+  }
+
+  .search-bar{
+    margin-bottom: 16px;
+  }
+
+  .textField{
+    width: 70%;
+  }
 }

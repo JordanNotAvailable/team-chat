@@ -1,7 +1,9 @@
 .home-container {
   position: relative;
   display: flex;
+  width: 100%;
   flex-direction: column;
+  margin-top: 66px;
   height: 100vh;
 }
 
@@ -10,9 +12,6 @@
 }
 
 .content-container {
-  display: flex;
-  flex-direction: row;
-  flex-grow: 1;
 }
 
 .home-content {
@@ -33,7 +32,26 @@
 .gamebar-container {
   position: fixed;
   left: 0;
-  top: 75px;
-  width: 130px;
+  top: 77px;
+  width: 250px;
   height: 100vh;
+}
+
+@media screen and (max-width : 768px) {
+  .gamebar-container{
+    height: 200px;
+    width: 100%;
+  }
+  .content-container{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .chat-nav-container{
+    margin-left: 0px !important;
+    margin-top: 200px !important;
+  }
+  .chatNav .header{
+    flex-direction: column !important;
+  }
 }

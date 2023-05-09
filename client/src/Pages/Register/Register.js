@@ -106,18 +106,18 @@ const Register = () => {
     return (
         <>
             {success ? (
-                <section>
+                <section className="mt-20">
                     <h1>Success!</h1>
-                    <p>
+                    <p className="register">
                         <a href="/home">Home</a>
                     </p>
                 </section>
             ) : (
-                <section>
+                <section className="mt-20 rounded-sm  bg-[#1e1b4b] " >
                     <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
-                    <h1>Register</h1>
+                    <h1  className='w-full text-white text-center'>Register</h1>
                     <form onSubmit={handleSubmit}>
-                    <label htmlFor="email">
+                    <label  className='w-full text-white' htmlFor="email">
                             Email:
                             <FontAwesomeIcon icon={faCheck} className={validEmail ? "valid" : "hide"} />
                             <FontAwesomeIcon icon={faTimes} className={validEmail || !email ? "hide" : "invalid"} />
@@ -130,6 +130,8 @@ const Register = () => {
                             value={email}
                             required
                             aria-invalid={validEmail ? "false" : "true"}
+                            className="w-full rounded-sm"
+
                             aria-describedby="emailnote"
                             onFocus={() => setEmailFocus(true)}
                             onBlur={() => setEmailFocus(false)}
@@ -139,7 +141,7 @@ const Register = () => {
                             The email entered must be a vailid email.
                         </p>
 
-                        <label htmlFor="username">
+                        <label  className='w-full text-white' htmlFor="username">
                             Username:
                             <FontAwesomeIcon icon={faCheck} className={validName ? "valid" : "hide"} />
                             <FontAwesomeIcon icon={faTimes} className={validName || !user ? "hide" : "invalid"} />
@@ -152,6 +154,8 @@ const Register = () => {
                             onChange={(e) => setUser(e.target.value)}
                             value={user}
                             required
+                            className="w-full rounded-sm"
+
                             aria-invalid={validName ? "false" : "true"}
                             aria-describedby="uidnote"
                             onFocus={() => setUserFocus(true)}
@@ -164,7 +168,7 @@ const Register = () => {
                             Must begin with a letter.<br />
                             Letters, numbers, underscores, hyphens allowed.
                         </p>
-                        <label htmlFor="password">
+                        <label  className='w-full text-white' htmlFor="password">
                             Password:
                             <FontAwesomeIcon icon={faCheck} className={validPwd ? "valid" : "hide"} />
                             <FontAwesomeIcon icon={faTimes} className={validPwd || !pwd ? "hide" : "invalid"} />
@@ -174,6 +178,8 @@ const Register = () => {
                             id="password"
                             onChange={(e) => setPwd(e.target.value)}
                             value={pwd}
+                            className="w-full rounded-sm"
+
                             required
                             aria-invalid={validPwd ? "false" : "true"}
                             aria-describedby="pwdnote"
@@ -187,7 +193,7 @@ const Register = () => {
                             Allowed special characters: <span aria-label="exclamation mark">!</span> <span aria-label="at symbol">@</span> <span aria-label="hashtag">#</span> <span aria-label="dollar sign">$</span> <span aria-label="percent">%</span>
                         </p>
 
-                        <label htmlFor="confirm_pwd">
+                        <label  className='w-full text-white' htmlFor="confirm_pwd">
                             Confirm Password:
                             <FontAwesomeIcon icon={faCheck} className={validMatch && matchPwd ? "valid" : "hide"} />
                             <FontAwesomeIcon icon={faTimes} className={validMatch || !matchPwd ? "hide" : "invalid"} />
@@ -198,6 +204,8 @@ const Register = () => {
                             onChange={(e) => setMatchPwd(e.target.value)}
                             value={matchPwd}
                             required
+                            className="w-full rounded-sm"
+
                             aria-invalid={validMatch ? "false" : "true"}
                             aria-describedby="confirmnote"
                             onFocus={() => setMatchFocus(true)}
@@ -208,15 +216,18 @@ const Register = () => {
                             Must match the previous password used.
                         </p>
 
-                        <button disabled={!validName || !validPwd || !validMatch ? true : false}>Create account</button>
+                        {/* <button disabled={!validName || !validPwd || !validMatch ? true : false}>Create account</button> */}
+
+                        <button  disabled={!validName || !validPwd || !validMatch ? true : false}  type="submit" className="px-4 py-2 mt-6 hover:bg-blue-600 bg-blue-500 text-white rounded">
+                            Create Account
+                        </button>
                     </form>
-                    <p>
-                        Already have an account?<br />
-                        <span className="line">
-                            {/*put router link here*/}
-                            <a href="./Signin">Sign In</a>
-                        </span>
-                    </p>
+                    <p className='text-white'>
+                    Already have an account?<br />
+                            <span className="line text-sm" style={{fontSize : '16px'}}>
+                                <a href="./Signin">Sign In</a>
+                            </span>
+                        </p>
                 </section>
             )}
             {/* <Loader type="pacman" /> */}
