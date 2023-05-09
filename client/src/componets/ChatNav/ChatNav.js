@@ -1,15 +1,29 @@
 import React, { useState, useEffect, useRef } from 'react';
-import Modal from '../FriendModal/FriendModal'
 import ChatContent from '../ChatContent/ChatContent';
+import { useMutation, useLazyQuery } from "@apollo/client";
+import { ADD_FRIEND } from "../../utils/mutations";
+import { GET_USER_BY_USERNAME } from "../../utils/queries"
 import './ChatNav.css';
 
 export default function ChatNav({ setOpen, chatActive, socket, onOpen, groupchat }) {
 
+  
+  const lastMessageRef = useRef(null);
+  const user = useRef("")
+
+  const [userFocus, setUserFocus] = useState(false);
   const [messages, setMessages] = useState([]);
   const [typingStatus, setTypingStatus] = useState('');
-  const lastMessageRef = useRef(null);
 
-  const [modal, setModal] = useState(false);
+  const [ addFriend, {error} ] = useMutation(ADD_FRIEND)
+
+  const [checkUsername,{ loading, data }] = useLazyQuery(GET_USER_BY_USERNAME, {variables: { username: user.current?.value }})
+  
+   useEffect(() => {
+      if (user.current?.value && !userFocus) {
+          checkUsername()
+      }
+  }, [userFocus]);
 
   useEffect(() => {
     socket.on('messageResponse', (data) => setMessages([...messages, data]));
@@ -19,31 +33,34 @@ export default function ChatNav({ setOpen, chatActive, socket, onOpen, groupchat
     lastMessageRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
 
-  const toggle = () => {
-    setModal(!modal);
-  };
-
+  const handleSubmit = async () => {
+    const { data } = await addFriend({
+      variables: {
+        username: user.current?.value
+      }
+    });
+    console.log(data);
+  }
   return (
     <>
       <div className="ChatNav">
       <div className="">
         <div className="header">
           <div className="search-bar">
-            <input type="text" placeholder="Search chat name" />
+            <input onBlur={() => setUserFocus(false)} ref={user} type="text" placeholder="Search username" />
           </div>
           <div className="button-group">
             <div className="flex gap-4 justify-center">
-              <button onClick={() => onOpen()} className=" mt-0 px-4 py-2 hover:bg-blue-600 bg-blue-500 text-white rounded">
-                Create group chat
+              <button  onClick={handleSubmit} className=" mt-0 px-4 py-2 hover:bg-blue-600 bg-blue-500 text-white rounded">
+                Add Friend
               </button>
               <button className=" mt-0 px-4 py- 2 hover:bg-blue-600 bg-blue-500 text-white rounded">
                 Create chat
               </button>
-              <button onClick={toggle} className=" mt-0 px-4 py-2 hover:bg-blue-600 bg-blue-500 text-white rounded">
-                Add Friend
+              <button onClick={() => onOpen()} className=" mt-0 px-4 py-2 hover:bg-blue-600 bg-blue-500 text-white rounded">
+                Create group chat
               </button>
             </div>
-            {modal ? <Modal toggle={toggle} /> : null}
           </div>
         </div>
         {chatActive ?

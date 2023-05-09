@@ -29,12 +29,14 @@ The application can be used by going to the deployed site and either using it on
 - @fortawesome/fontawesome-svg-core
 - @fortawesome/free-solid-svg-icons
 - @fortawesome/react-fontawesome
+- @headlessui/react
 - apollo-server-express
 - bcrypt
 - graphql
 - jsonwebtoken
 - jwt-decode
 - socket.io
+- socket.io-client
 - cors
 - express
 - mongoose

@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { LOG_IN } from '../../utils/mutations';
 import Auth from '../../utils/auth';
 
 function Signin(props) {
+
+    const navigate = useNavigate();
 
     const [formState, setFormState] = useState({ username: '', password: '' });
     const [success, setSuccess] = useState(false);
@@ -20,6 +22,7 @@ function Signin(props) {
             const token = mutationResponse.data.login.token;
             Auth.login(token);
             setSuccess(true);
+            navigate('/home');
         } catch (e) {
             console.log(e);
         }
