@@ -1,8 +1,8 @@
-import Register from './pages/Register/Register';
 import Home from './pages/Home/Home';
 import Signin from './pages/Signin/Signin';
 import Landing from './pages/Landing/Landing';
 import SPR from './pages/SPR/SPR'
+import Register from './pages/Register/Register';
 import Header from './componets/Header/Header'
 import { ApolloClient, ApolloProvider, InMemoryCache, createHttpLink } from '@apollo/client';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
