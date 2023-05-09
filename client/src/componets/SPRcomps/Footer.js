@@ -10,9 +10,9 @@ const Footer = () => {
   return (
     <>
       <footer className="footer">
-        <button className="rules" onClick={toggle}>
+        {/* <button className="rules" onClick={toggle}>
           Rules
-        </button>
+        </button> */}
       </footer>
       {modal ? <Modal toggle={toggle} /> : null}
     </>
