@@ -28,6 +28,7 @@ button,
 textarea {
   font-family: 'Nunito', sans-serif;
   font-size: 22px;
+  color: black;
   padding: 0.25rem;
   border-radius: 0.5rem;
 }
