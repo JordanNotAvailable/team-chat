@@ -1,4 +1,4 @@
-import Register from './pages/Register/Register';
+import Register from './pages/Register/Register.js';
 import Home from './pages/Home/Home';
 import Signin from './pages/Signin/Signin';
 import Landing from './pages/Landing/Landing';
